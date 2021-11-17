@@ -7,13 +7,27 @@
 </template>
 
 <script>
+import firebase from "firebase/app";
+import "firebase/auth";
+
 export default {
   name: "app",
   components: {},
   data() {
     return {};
   },
-  created() {},
+  created() {
+    /*setTimeout(() => {},2000) //temporary fix for staying logged in when refreshing.
+      console.log(firebase.auth().currentUser.email);*/
+    
+    firebase.auth().onAuthStateChanged((user) => {
+      this.$store.commit("updateUser",user);
+      if(user) {
+        this.$store.dispatch("getCurrentUser");
+        console.log(this.$store.state.user.email);
+      }
+    }); 
+  },
   mounted() {},
   methods: {},
   watch: {},
@@ -50,5 +64,11 @@ export default {
 
 .link-light {
   color: #fff;
+}
+
+.error{
+  text-align: center;
+  font-size: 14px;
+  color: red;
 }
 </style>

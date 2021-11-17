@@ -5,7 +5,7 @@
               Don't have an account?
               <router-link class="router-link" :to="{ name: 'Register' }">Register</router-link>
           </p>
-          <h2>Login to Vicarius Partner Platform </h2>
+          <h2>Login to our project </h2>
           <div class="inputs">
               <div class="input">
                   <input type="text" placeholder="Email" v-model="email" />
@@ -15,11 +15,10 @@
                 <input type="password" placeholder="Password" v-model="password" />
                 <password class="icon" />
               </div>
-
+              <div class="error" v-show="error">{{this.errorMsg}}</div>
           </div>
         <router-link class="forgot-password" :to="{ name: 'ForgotPassword'}">Forgot your password?</router-link>
-
-        <button>SIGN IN</button>
+        <button @click.prevent="signIn">SIGN IN</button>
       </form>
   </div>
 </template>
@@ -27,6 +26,10 @@
 <script>
 import email from "../assets/Icons/envelope-regular.svg"
 import password from "../assets/Icons/lock-alt-solid.svg"
+import firebase from "firebase/app";
+import "firebase/auth";
+
+
 
 export default {
     name: "Login",
@@ -37,12 +40,26 @@ export default {
 },
 data(){
     return{
-        email: null,
-        password: null,
+        email: "",
+        password: "",
+        error: null,
+        errorMsg:""
     };
 },
-
-
+methods:{
+    signIn() {
+        firebase.auth().signInWithEmailAndPassword(this.email,this.password).then(()=> {
+            //alert("Works");
+            this.$router.push({name:"Home"});
+            this.error = false;
+            this.errorMsg = "";
+            console.log(firebase.auth().currentUser.uid) //making sure the log in works.
+        }).catch(err => {
+            this.error=true;
+            this.errorMsg = err.message;
+        });
+    },
+},
 };
 </script>
 
@@ -152,6 +169,7 @@ data(){
     
     }   
 }
+
 
 
 </style>

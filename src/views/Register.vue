@@ -5,7 +5,7 @@
               Already have an account?
               <router-link class="router-link" :to="{ name: 'Login' }">Login</router-link>
           </p>
-          <h2>Create Account - Vicarius Partner Platform  </h2>
+          <h2>Create Account   </h2>
           <div class="inputs">
                 <div class="input">
                   <input type="text" placeholder="First Name" v-model="firstName" />
@@ -29,15 +29,20 @@
               </div>
 
           </div>
-        <button>Create Account</button>
+          <div class="error" v-show="error">{{this.errorMsg}}</div>
+        <button @click.prevent="register">Create Account</button> 
       </form>
   </div>
 </template>
 
 <script>
-import email from "../assets/Icons/envelope-regular.svg"
-import password from "../assets/Icons/lock-alt-solid.svg"
-import user from "../assets/Icons/user-alt-light.svg"
+import email from "../assets/Icons/envelope-regular.svg";
+import password from "../assets/Icons/lock-alt-solid.svg";
+import user from "../assets/Icons/user-alt-light.svg";
+import firebase from "firebase/app";
+import "firebase/auth";
+import db from "../firebase/firebaseInit";
+
 
 export default {
     name: "Register",
@@ -48,11 +53,48 @@ export default {
     },
     data(){
         return{
-            firstName: null,
-            lastName: null,
-            username: null,
-            password: null,
+            firstName:"",
+            lastName: "",
+            username: "",
+            password: "",
+            error: null,
+            errorMsg: "",
         };
+    },
+    methods:{
+        async register() { //need to replace with 'catch' and stuff to display firebase's error messages
+            if(
+                this.email !=="" &&
+                this.password !== "" &&
+                this.firstName !== "" &
+                this.lastName !== "" &&
+                this.username !== "" 
+
+            ) {
+                this.error=false; //reset the error state & sign a user up
+                this.error="";
+                const firebaseAuth = await firebase.auth();
+                const createUser = await firebaseAuth.createUserWithEmailAndPassword(this.email,this.password);
+                const result = await createUser;
+
+                const dataBase = db.collection("users").doc(result.user.uid) //creating a collection in firebase and inserting the user there.
+                await dataBase.set({ //parametes that will be written in the db for each user
+                    firstName: this.firstName,
+                    lastName:  this.lastName,
+                    username: this.username,
+                    email: this.email,
+                    
+                });
+                this.$router.push({name: "Home"});
+
+                return;
+            }
+            this.error = true;
+            this.errorMsg = "Please fill out all the fields!";
+            return;
+
+            
+        },
     },
 
 };

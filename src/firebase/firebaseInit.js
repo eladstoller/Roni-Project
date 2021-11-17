@@ -3,13 +3,13 @@ import "firebase/firestore";
 
 
 var firebaseConfig = {
-    apiKey: "AIzaSyCNYx_3MjhxVSa7Jt7D-z__CZW8QzyI8cg",
-    authDomain: "vicarius-partner-platform.firebaseapp.com",
-    projectId: "vicarius-partner-platform",
-    storageBucket: "vicarius-partner-platform.appspot.com",
-    messagingSenderId: "884684781496",
-    appId: "1:884684781496:web:a145cce15d66d96a8f014d",
-    measurementId: "G-HS4EXBTJXJ"
+  apiKey: "AIzaSyBH7wbXY7DrTP0sHl1TvvmvIdsHdmmDx_w",
+  authDomain: "roni-project-5b667.firebaseapp.com",
+  projectId: "roni-project-5b667",
+  storageBucket: "roni-project-5b667.appspot.com",
+  messagingSenderId: "111649334631",
+  appId: "1:111649334631:web:0cb7a6a95ade3d5a29fbc2",
+  measurementId: "G-6M8VJ62KCL"
   };
 
   const firebaseApp = firebase.initializeApp(firebaseConfig);

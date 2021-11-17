@@ -49,7 +49,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to,from,next) =>{
-  document.title = `${to.meta.title} | Vicarius Partner Platform ` ; 
+  document.title = `${to.meta.title} | Roni's Course Project ` ; 
   next();
 });
 
