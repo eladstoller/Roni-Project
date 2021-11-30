@@ -4,16 +4,25 @@ import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import ForgotPassword from "../views/ForgotPassword.vue";
+import Result from "../views/Result.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
+    path: "/home",
     name: "Home",
     component: Home,
     meta: {
       title:'Home'
+    }
+  },
+  {
+    path: "/", //default route on startup
+    name: "login",
+    component: Login,
+    meta: {
+      title:'Login'
     }
   },
   {
@@ -39,6 +48,14 @@ const routes = [
     meta: {
       title:'Forgot Password'
     }
+  },
+  {
+    path: "/result",
+    name: "Result",
+    component: Result,
+    meta: {
+      title:'Result'
+    },
   },
 ];
 

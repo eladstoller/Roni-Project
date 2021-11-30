@@ -1,5 +1,5 @@
 <template>
-  <div class="Home">Home
+  <div class="Home">
    
      <head>
         
@@ -108,7 +108,7 @@
             
             <hr>
             
-            <button type="submit" class="registerbtn">continue to recommended price</button>
+            <button @click.prevent="goToResult" type="submit" class="registerbtn">continue to recommended price</button>
         </div>
         
      </form> 
@@ -134,8 +134,13 @@ export default {
       change()
       {
           $(".selectFilter").on("change",function(){var e=$(this).data("target"),i=$(this).find(":selected").data("ref");$("select."+e).val("-1"),null==i?$("select."+e).find("option").each(function(){console.log("inside undefined"),$(this).removeAttr("disabled hidden")}):$("select."+e).find("option").each(function(){var e=$(this).data("belong"),t=$(this).val();i!=e&&-1!=t?($(this).prop("disabled",!0),$(this).prop("hidden",!0)):($(this).prop("disabled",!1),$(this).prop("hidden",!1))})});
-      }
-  }
+      },
+   goToResult()
+   {
+   this.$router.push({name:"Result"});
+   },
+  } 
+  
 };
 
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="form-wrap">Login
+  <div class="form-wrap">
       <form class="login">
           <p class="login-register">
               Don't have an account?
