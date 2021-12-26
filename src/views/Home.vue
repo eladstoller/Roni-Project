@@ -24301,8 +24301,8 @@
        
                 <label class="details" for="Transmission"  ><b>Transmission: </b></label>
                 <select v-model="Transmission" >
-                    <option disabled selected value="">Select Transmission</option>
-                    
+              
+                     <option value="" selected disabled hidden>Select Transmission</option>
                     <option value="clean">clean</option>
                     <option value="lien">lien</option>
                     <option value="missing">missing</option>
@@ -24322,17 +24322,7 @@
 
                 </select>
             </div>
-            <div class="input-box">
-                <label class="details" for="Size_of_vehicle"><b>Size of vehicle: </b></label>
-                <select name="Size_of_vehicle" required v-model="Size_of_vehicle">
-                    <option value="" selected disabled hidden>Select a Size of vehicle</option>
-                    <option value="compact">compact</option>
-                    <option value="full-size">full-size</option>
-                    <option value="mid-size">mid-size</option>
-                    <option value="sub-compact">sub-compact</option>
-
-                </select>
-            </div>
+     
             <div class="input-box">
                 <label class="details" for="Type_of_vehicle"><b>Type of vehicle: </b></label> 
                 <select name="Type_of_vehicle" required v-model="Type_of_vehicle">
@@ -24415,7 +24405,7 @@ export default {
             Fuel_Type:"",
             Transmission:"",
             Drive:"",
-            Size_of_vehicle:"",
+           
             Type_of_vehicle:"",
             Color:"",
             Year:"",
@@ -24441,7 +24431,7 @@ export default {
             this.Fuel_Type!=="" &&
             this.Transmission!=="" &&
             this.Drive!=="" &&
-            this.Size_of_vehicle!=="" &&
+            
             this.Type_of_vehicle!=="" &&
             this.Color!=="" &&
             this.Year!=="" &&
