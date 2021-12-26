@@ -13,10 +13,13 @@
         <div class="container">
             <div class="title"><b>Hello, customer!</b>
                 <div class="subtitle">
+
                     Please fill your car details below</div>  
+
             </div>    
             </div>   
             <hr>
+            
             <div class="content">
             <div class="user-details">
            
@@ -27,7 +30,7 @@
       <div class="input-box"> 
              
                 <label class="details" for="Manufacturer"><b>Manufacturer: </b></label> 
-                <select data-target="secondList" class="firstList selectFilter" v-on:click="change">
+                <select data-target="secondList" class="firstList selectFilter" v-on:click="change" v-model="Manufacturer">
   <option value="" selected disabled hidden>Select a Manufacturer</option>
 <option data-ref="acura">acura</option>
 <option data-ref="alfa-romeo">alfa-romeo</option>
@@ -75,9 +78,9 @@
                     </select>     
         
                 <label class="details" for="Model"><b>Model: </b></label> 
-                <select data-target="thirdList" class="secondList selectFilter">
+                <select data-target="thirdList" class="secondList selectFilter" v-model="Model">
 
-	<option value="-1">Select Model </option>
+	<option value="" selected disabled hidden>Select a Model</option>
     <option  data-belong="land rover">defender 110</option>
 <option  data-belong="land rover">discovery i</option>
 <option  data-belong="land rover">discovery ll</option>
@@ -24254,8 +24257,8 @@
             </div>
           <div class="input-box">
                 <label class="details" for="Condition"><b>Condition: </b></label>  
-                <select name="Condition" required>
-                    <option value="" selected disabled hidden>Select a Condition</option>
+                <select name="Condition" required v-model="Condition">
+                        <option value="" selected disabled hidden>Select a Condition</option>
                         <option value="good">good</option>
                         <option value="excellent">excellent</option>
                         <option value="fair">fair</option>
@@ -24266,7 +24269,8 @@
             </div>  
                <div class="input-box">
                 <label class="details" for="Cylinders"><b>Cylinders: </b></label>  
-                <select name="Cylinders" required>
+            
+                <select name="Cylinders" required v-model="Cylinders" >
                     <option value="" selected disabled hidden>Select a Cylinders</option>
                    <option value="3 cylinders">3 cylinders</option>
                     <option value="4 cylinders">4 cylinders</option>
@@ -24282,8 +24286,8 @@
           
             
             <div class="input-box">
-                <label class="details" for="Fuel Type"><b>Fuel Type: </b></label>
-                <select name="Fuel Type" required>
+                <label class="details" for="Fuel_Type"><b>Fuel Type: </b></label>
+                <select name="Fuel_Type" required v-model="Fuel_Type">
                     <option value="" selected disabled hidden>Select a Fuel Type</option>
                    <option value="gas">gas</option>
                     <option value="other">other</option>
@@ -24294,9 +24298,11 @@
                 </select>
             </div>
             <div class="input-box">
-                <label class="details" for="Transmission"><b>Transmission: </b></label>
-                <select name="Transmission" required>
-                    <option value="" selected disabled hidden>Select a Transmission</option>
+       
+                <label class="details" for="Transmission"  ><b>Transmission: </b></label>
+                <select v-model="Transmission" >
+                    <option disabled selected value="">Select Transmission</option>
+                    
                     <option value="clean">clean</option>
                     <option value="lien">lien</option>
                     <option value="missing">missing</option>
@@ -24308,7 +24314,7 @@
             </div>
             <div class="input-box">
                 <label class="details" for="Drive"><b>Drive: </b></label>
-                <select name="Drive" required>
+                <select name="Drive" required  v-model="Drive">
                     <option value="" selected disabled hidden>Select a Drive like 4X4</option>
                     <option value="4wd">4wd</option>
                     <option value="fwd">fwd</option>
@@ -24317,8 +24323,8 @@
                 </select>
             </div>
             <div class="input-box">
-                <label class="details" for="Size of vehicle"><b>Size of vehicle: </b></label>
-                <select name="Size of vehicle" required>
+                <label class="details" for="Size_of_vehicle"><b>Size of vehicle: </b></label>
+                <select name="Size_of_vehicle" required v-model="Size_of_vehicle">
                     <option value="" selected disabled hidden>Select a Size of vehicle</option>
                     <option value="compact">compact</option>
                     <option value="full-size">full-size</option>
@@ -24328,8 +24334,8 @@
                 </select>
             </div>
             <div class="input-box">
-                <label class="details" for="Type of vehicle"><b>Type of vehicle: </b></label> 
-                <select name="Type of vehicle" required>
+                <label class="details" for="Type_of_vehicle"><b>Type of vehicle: </b></label> 
+                <select name="Type_of_vehicle" required v-model="Type_of_vehicle">
                     <option value="" selected disabled hidden>Select a Type of vehicle</option>
                     <option value="sedan">sedan</option>
                     <option value="bus">bus</option>
@@ -24350,7 +24356,7 @@
             </div>
             <div class="input-box">
                 <label class="details" for="Color"><b>Color: </b></label>
-                <select name="Color" required>
+                <select name="Color" required v-model="Color">
                     <option value="" selected disabled hidden>Select a Color</option>
                     <option value="white">white</option>
                     <option value="blue">blue</option>
@@ -24371,15 +24377,15 @@
             
             <div class="input-box">
                 <label class="details" for="Year"><b>Year: </b></label>
-                <input type="text" placeholder="Year" id="Year" name="Year"/>
+                <input  type="text" placeholder="Please insert Year between 1910-2022" id="Year" name="Year" v-model="Year"/>
             </div>
             <div class="input-box">
                 <label class="details" for="Mileage"><b>Mileage: </b></label>
-                <input type="text" placeholder="Mileage" id="Mileage" name="Mileage"/>
+                <input type="text" placeholder="Mileage" id="Mileage" name="Mileage" v-model="Mileage"/>
             </div>
             <hr>
-            
-            <button @click.prevent="goToResult" type="submit" class="registerbtn">continue to recommended price</button>
+            <div class="error" v-show="error">{{this.errorMsg}}</div>
+            <button @click.prevent="goToResult"  class="registerbtn">continue to recommended price</button>
         </div>
         
      </form> 
@@ -24400,19 +24406,65 @@ export default {
 
   name: "Home",
   components: {},
+  data(){
+        return{
+            Manufacturer:"",
+            Model:"",
+            Condition:"",
+            Cylinders:"",
+            Fuel_Type:"",
+            Transmission:"",
+            Drive:"",
+            Size_of_vehicle:"",
+            Type_of_vehicle:"",
+            Color:"",
+            Year:"",
+            Mileage:"",
+            error: null,
+            errorMsg: "",
+        };
+    },
   
   methods:{
       change()
       {
           $(".selectFilter").on("change",function(){var e=$(this).data("target"),i=$(this).find(":selected").data("ref");$("select."+e).val("-1"),null==i?$("select."+e).find("option").each(function(){console.log("inside undefined"),$(this).removeAttr("disabled hidden")}):$("select."+e).find("option").each(function(){var e=$(this).data("belong"),t=$(this).val();i!=e&&-1!=t?($(this).prop("disabled",!0),$(this).prop("hidden",!0)):($(this).prop("disabled",!1),$(this).prop("hidden",!1))})});
       },
+       
+    
    goToResult()
    {
-   this.$router.push({name:"Result"});
+       
+    if (this.Manufacturer!=="" &&
+            this.Model!=="" &&
+            this.Cylinders!=="" &&
+            this.Fuel_Type!=="" &&
+            this.Transmission!=="" &&
+            this.Drive!=="" &&
+            this.Size_of_vehicle!=="" &&
+            this.Type_of_vehicle!=="" &&
+            this.Color!=="" &&
+            this.Year!=="" &&
+            this.Year >="1910" && this.Year <="2022"  &&
+            this.Mileage!=="" 
+        )
+     {
+         this.error=false; //reset the error state & sign a user up
+        this.error="";
+         this.$router.push({name:"Result"});
+         return true
+      }   
+            this.error = true;
+            this.errorMsg = "Please fill out all the fields!";
+            
+            return;
    },
-  } 
   
-};
+  }
+  
+  
+  
+    };
 
 </script>
     <style lang="scss">
@@ -24479,17 +24531,24 @@ export default {
         }
         .user-details .input-box{
         margin-bottom: 15px;
-        width: calc(100% / 2 - 20px);
+        width: 25%;
+        height: 25px;
+        padding: 15px;
+        margin: 5px 0 22px 0;
         }
         .input-box label.details{
         display: block;
         font-weight: 500;
         margin-bottom: 5px;
+            width: 25%;
+        height: 25px;
+        padding: 15px;
+        margin: 5px 0 22px 0;
         }
         
         .user-details .input-box  input[type=text]{
-        height: 45px;
-        width: 100%;
+         height: 45px;
+        width: 25%;
         outline: none;
         font-size: 16px;
         border-radius: 5px;
@@ -24497,10 +24556,11 @@ export default {
         border: 1px solid #ccc;
         border-bottom-width: 2px;
         transition: all 0.3s ease;
+
         background: #f1f1f1;
         margin: 5px 0 22px 0;
         display: inline-block;
-        text-align: left;
+        text-align: center;
         }
        
         /* Overwrite default styles of hr */
