@@ -62,7 +62,7 @@ export default {
         };
     },
     methods:{
-        async register() { //need to replace with 'catch' and stuff to display firebase's error messages
+        async register() { //need to replace with 'catch' and stuff to display firebase's error messages    
             if(
                 this.email !=="" &&
                 this.password !== "" &&
